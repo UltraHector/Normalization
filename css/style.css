@@ -1,0 +1,202 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/**   Header **/
+#header{
+    /*The style for the wide banner on the head*/
+    background-color: #CC0000;
+    width:100%;
+    height:130px;
+    position: relative;
+}
+#footer{
+    width:500px;
+    position: relative;
+    margin:0 auto;
+    text-align: center;
+}
+
+.headerGriffithPortalLinkBar{
+    width:100%; 
+    background:#D9D9D9; 
+    height:20px;
+    position:absolute; 
+    left: 0%; 
+    padding-top: 5px; 
+    padding-bottom: 5px;
+}
+.headerBannerTitle{
+    width:350px;
+    color:white;
+    font-weight: bold;
+    position:relative;
+    margin: auto;
+    top:20px;
+    font-family: 'Cantata One', serif;
+}
+
+
+/** Main content **/
+#mainContent{
+    /*The style for the main body of the page*/
+    background: #CC0000;
+    display: table;
+}
+#mainContentLeftColumn{
+    width:300px;
+    background: #CC0000;
+    float:left;
+    padding-left:20px;
+}
+.mainContentRightColumn{
+    background: white;
+    float:right;
+    padding-left:90px;
+    height:900px;
+}
+
+#mainContentLeftColumn .navMainContent li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    padding-left:10px;
+}
+#mainContentLeftColumn .navMainContent { 
+    list-style: none;
+    padding-left:0px;
+    margin-top: 10px; 
+}
+#mainContentLeftColumn .navMainContent li { 
+    padding-bottom: 7px;
+    padding-top: 7px;
+    padding-left:10px;
+}
+#mainContentLeftColumn .navMainContent li:hover{
+    background:#BB0000;
+}
+#mainContentLeftColumn .subTitle{
+    color:white; 
+    padding-left:10px;
+}
+.navMainContentItemText{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    padding-left:10px;
+}
+
+.stepSettings{
+    padding-left:10px;
+    margin-top:20px;
+}
+
+/** The switch button for on/off **/
+.onoffswitch {
+    position: relative; width: 58px;
+    float:right;
+    margin-right:38px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 9px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 8px;
+    background-color: #CC0000; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 8px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 24px; margin: 2px;
+    background: #FFFFFF;
+    position: absolute; top: 0px; bottom: 5px;
+    right: 34px;
+    border: 2px solid #999999; border-radius: 7px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+/** The Functioanl dependencies input field **/
+.dynamicInput{
+    text-align: center;
+    font-size:15px;
+    width:900px;
+}
+
+.functionalDependencyButtonClass{
+    margin-top:5px;
+    color:white;
+    background:#BB0000;
+    border:none;
+    padding:5px;
+}
+
+.checkNormalFormDiv{
+    width:800px;
+}
+
+.findCandidateKeysResult ul li{
+    padding:5px;
+    border: 1px #D1D1D1 solid;
+}
+.normalizedTablesDiv{
+    background:#E9E9E9;
+    padding-top:15px;
+    padding-bottom:35px;
+    padding-left:15px;
+    padding-right:100px;
+    border: 2px #D2D2D2 solid;
+    border-radius: 5px;
+    margin-bottom:10px;
+}
+
+.normalizedTableAttributeSpan{
+    margin:5px;
+    background:#CC0000;
+    padding:3px;
+    border: 2px #CC0000 solid;
+    border-radius: 5px;
+    color:white;
+}
+
+.candidateKeysListDiv{
+    background:#E9E9E9;
+    padding-top:15px;
+    padding-bottom:35px;
+    padding-left:15px;
+    padding-right:100px;
+    border: 2px #D2D2D2 solid;
+    border-radius: 5px;
+}
+
+.candidateKeysAttributeSpan{
+    margin:5px;
+    background:#CC0000;
+    padding:3px;
+    border: 2px #CC0000 solid;
+    border-radius: 5px;
+    color:white;
+}
