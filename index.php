@@ -51,6 +51,10 @@
                         <img src="images/nav_icon_resources.png" width="16" height="16">
                         <a href="#resources" data-toggle="tooltip" data-placement="right" title="Check some learning resources about database!">Learning Resources</a>
                     </li>
+					<li id="loadExampleLink">
+                        <img src="images/nav_icon_example.png" width="16" height="19">
+                        <a href="#loadExample" data-toggle="tooltip" data-placement="right" title="Use this feature to load in an example set of attributes and functional dependencies!">Load Example</a>
+                    </li>
                     <h3 class="subTitle">Functions</h3>
                     <li id="findCandidateKeysLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
@@ -108,7 +112,9 @@
         <div id="footer">
             <div style="color:#8F8F8F; font-size:12px; ">© ICT of Griffith University 2015</div>
         </div>
+		
     </body>
 
+	<?php include 'views/subLoadExample.php' ?>
 
 </html>

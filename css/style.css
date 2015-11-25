@@ -153,6 +153,15 @@ body {
     border:none;
     padding:5px;
 }
+#loadExampleConfirmBtn{
+	float:right; 
+	margin:10px;
+	color:white;
+	background:#BB0000;
+	border:none; 
+	width:20%; 
+	padding:10px;
+}
 
 .checkNormalFormDiv{
     width:800px;
@@ -199,4 +208,13 @@ body {
     border: 2px #CC0000 solid;
     border-radius: 5px;
     color:white;
+}
+
+#subLoadExample{
+	position:absolute;
+	top:0px;
+	width:100%;
+	background-color:rgba(0,0,0,0.4);
+	z-index:40002; /* ensures box appears above overlay */
+	height: 100%;
 }

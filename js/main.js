@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var tagInputCounter = 3;
 
 $(document).ready(function () {
     /* Tool tips widget when use */
@@ -35,6 +36,10 @@ $(document).ready(function () {
     $('#learningResourcesLink').click(function () {
         showSubPage("#subLearningResources");
     });
+	
+	$('#closeLoadExample').click(function () {
+       $('#subLoadExample').hide();
+    });
     
     $("#attributesTextArea").keypress(function () {
         $('.leftDependencyInputDivClass').each(function (i, obj) {
@@ -61,6 +66,8 @@ $(document).ready(function () {
     /*******************************/
     updateAutocomplete();
     showSubPage("#subEditAttributes");
+	
+	$('#subLoadExample').hide();
 });
 
     
@@ -145,6 +152,8 @@ normalizationApp.controller('subFindMinimalCoverCtrl', function ($scope, $http) 
     });
 });
 
+
+
 normalizationApp.controller('subNormalize2NFCtrl', function ($scope, $http) {
     $('#normalize2NFLink').click(function () {
         var inputData = getInputDataInJson();
@@ -188,16 +197,73 @@ normalizationApp.controller('subNormalizeBCNFCtrl', function ($scope, $http) {
     });
 });
 
+normalizationApp.controller('subLoadExampleCtrl', function ($scope, $http) {
+    $('#loadExampleLink').click(function () {
+        var inputData = getInputDataInJson();
+        $http.post('normalize.php?normalizeOption=loadExample', inputData).then(
+                function (data, status, jqXHR) {
+                   $('#subLoadExample').show();
+                   $scope.fdExamples = data['data'];
+                },
+                function (response) {
+                    // Error happened, try again
+                    // TODO
+                });
+    });
+	$('#loadExampleConfirmBtn').click(function () {
+		for (var index = 0; index < $scope.fdExamples.fdExamples.length; ++index) {
+			if($scope.fdExamples.fdExamples[index]['title'] == $("#fdExampleSelect").val()){
+				
+				/*
+				 * load attributes
+				 */
+				var attributesCommaSeperated = "";
+				var attributesNumber = $scope.fdExamples.fdExamples[index]['attributes'].length;
+				for(var attributeIndex = 0; attributeIndex < attributesNumber - 1;  ++attributeIndex) {
+					attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributeIndex]);
+					attributesCommaSeperated = attributesCommaSeperated.concat(", ");
+				}
+				attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributesNumber - 1]);
+				$("#attributesTextArea").val(attributesCommaSeperated);
+				
+				
+				/*
+				 * load fds
+				 */
+				$(".dynamicInput").remove();
+				tagInputCounter = 0;
+				var fdsNumber = $scope.fdExamples.fdExamples[index]['fd'].length;
+				for(var fdIndex = 0; fdIndex < fdsNumber; ++fdIndex){
+					addInput("mainContentFunctionalDependency");
+					var newAddedCounter = tagInputCounter - 1;
+					var newAddedId = "functionDependency_" + newAddedCounter;
+					
+					for(var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'].length; fdAttriIndex++){
+						$("#" + newAddedId).find(".leftDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'][fdAttriIndex]);
+					}
+					for(var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'].length; fdAttriIndex++){
+						$("#" + newAddedId).find(".rightDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'][fdAttriIndex]);
+					}
+
+				}
+
+				$('#subLoadExample').hide();
+				break;
+			}
+		}
+	});
+	
+});
+
 
 /*******************************/
 /* Functions */
 /*******************************/
 /*This function for adding or deleting input field*/
-var counter = 3;
 function addInput(divId) {
     var newdiv = document.createElement('div');
 
-    var newDivId = "functionDependency_" + counter;
+    var newDivId = "functionDependency_" + tagInputCounter;
     var leftDependencyInputId = "leftFunctionDependencyInput_" + newDivId;
     var rightDependencyInputId = "rightFunctionDependencyInput_" + newDivId;
 
@@ -233,7 +299,7 @@ function addInput(divId) {
     });
 
     updateAutocomplete();
-    counter++;
+    tagInputCounter++;
 }
 
 /* delete a dynamic input field */
@@ -248,6 +314,8 @@ function addBeforeTagChecker(event, ui) {
         return false;
     }
 }
+
+
 
 function updateAutocomplete() {
     var attributesArray = getTextAttributes();
