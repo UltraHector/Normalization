@@ -246,8 +246,9 @@ normalizationApp.controller('subLoadExampleCtrl', function ($scope, $http) {
 					}
 
 				}
-
+			
 				$('#subLoadExample').hide();
+				showSubPage("#subEditAttributes");
 				break;
 			}
 		}
