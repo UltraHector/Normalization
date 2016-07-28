@@ -25,5 +25,22 @@
              </span>
         </span>
     </div>
+
+    <div>
+        <h2 style="border-bottom: dotted 1px; padding-bottom: 5px;" >
+            Show Steps 
+            <label class="switch">
+                <input type="checkbox" id="normalize3NFSwitchButton">
+                <div class="slider round"></div>
+            </label>
+        </h2>
+        <div class="normalizedTablesDiv" id="normalize3NFStepsDiv" style="display: none;">
+             <span ng-repeat="step in steps">
+                 <div class="normalizedTableAttributeSpan"> 
+                    <div ng-bind-html="step | unsafe"></div>
+                 </div>
+             </span>
+        </div>
+    </div>
     
 </div>

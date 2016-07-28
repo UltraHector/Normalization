@@ -65,4 +65,30 @@
         </div>
     </div>
 
+    <div>
+        <h2 style="border-bottom: dotted 1px; padding-bottom: 5px;" >
+            Show Steps 
+            <label class="switch">
+                <input type="checkbox" id="testNFSwitchButton">
+                <div class="slider round"></div>
+            </label>
+        </h2>
+
+        <div class="normalizedTablesDiv" id="testNFStepsDiv" style="display: none;">
+            <h4>2NF</h4>
+            <div class="normalizedTableAttributeSpan"> 
+                <div ng-bind-html="steps2NF | unsafe"></div>
+            </div>
+            
+            <h4>3NF</h4>
+            <div class="normalizedTableAttributeSpan"> 
+                <div ng-bind-html="steps3NF | unsafe"></div>
+            </div>
+
+            <h4>BCNF</h4>
+            <div class="normalizedTableAttributeSpan"> 
+                <div ng-bind-html="stepsBCNF | unsafe"></div>
+            </div>
+        </div>
+    </div>
 </div>

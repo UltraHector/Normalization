@@ -1,5 +1,12 @@
 <?PHP
-require('service/NormalizeService.php');
+require_once('app/service/FindAllCK.php');
+require_once('app/service/FunctionalID.php');
+require_once('app/service/NFTest.php');
+require_once('app/service/NormalizeTo2NF.php');
+require_once('app/service/NormalizeTo3NF.php');
+require_once('app/service/NormalizeToBCNF.php');
+require_once('app/service/From1NFTo3NF.php');
+
 
 header('Content-Type: application/json');
 
@@ -22,8 +29,8 @@ switch($_GET["normalizeOption"]){
 		//echo $attributes;
 		$responseData = array();
 		$responseData["isBCNF"] = isBCNF($funcionalDependencySet, $attributes);
-		$responseData["is3NF"] = is3NF($funcionalDependencySet, $attributes, true);
-		$responseData["is2NF"] = is2NF($funcionalDependencySet, $attributes, true);
+		$responseData["is3NF"] = is3NF($funcionalDependencySet, $attributes);
+		$responseData["is2NF"] = is2NF($funcionalDependencySet, $attributes);
 		echo json_encode($responseData);
 		break;
 	case "findMinimalCover":
@@ -37,6 +44,9 @@ switch($_GET["normalizeOption"]){
 		break;
 	case "normalizeBCNF":
 		echo json_encode(ToBCNF($funcionalDependencySet, $attributes));
+		break;
+        case "1NFTo3NF":
+		echo json_encode(from1NFto3NF($funcionalDependencySet, $attributes));
 		break;
 	case "loadExample":
 		echo json_encode(loadFDExamples());

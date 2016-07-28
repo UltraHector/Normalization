@@ -6,6 +6,7 @@
 var tagInputCounter = 3;
 
 $(document).ready(function () {
+        
     /* Tool tips widget when use */
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -37,7 +38,7 @@ $(document).ready(function () {
         showSubPage("#subLearningResources");
     });
 	
-	$('#closeLoadExample').click(function () {
+    $('#closeLoadExample').click(function () {
        $('#subLoadExample').hide();
     });
     
@@ -60,18 +61,51 @@ $(document).ready(function () {
         });
     });
     
+    /**
+     * show steps buttons
+     */
+     $('#findMinimalCoverSwitchButton').click(function () {
+       $('#findMinimalCoverDivId').toggle();
+    });
+     $('#findCandidatekeysSwitchButton').click(function () {
+       $('#findCandidateKeysStepsDivId').toggle();
+    });
+    
+     $('#normalize3NFSwitchButton').click(function () {
+       $('#normalize3NFStepsDiv').toggle();
+    });
+    $('#normalize2NFSwitchButton').click(function () {
+       $('#normalize2NFStepsDiv').toggle();
+    });
+    $('#normalizeBCNFSwitchButton').click(function () {
+       $('#normalizeBCNFStepsDiv').toggle();
+    });
+    $('#1NFTo3NFSwitchButton').click(function () {
+       $('#1NFTo3NFStepsDiv').toggle();
+    });
+    
+    $('#testNFSwitchButton').click(function () {
+       $('#testNFStepsDiv').toggle();
+    });
+    
+    
+    
+    
+    
        
     /*******************************/
     /* Immidiate execute codes */
     /*******************************/
     updateAutocomplete();
     showSubPage("#subEditAttributes");
-	
-	$('#subLoadExample').hide();
 });
 
     
 var normalizationApp = angular.module('normalizationApp', []);
+
+normalizationApp.filter('unsafe', function($sce) { return $sce.trustAsHtml; });
+    
+    
 normalizationApp.controller('subFindCandidateKeysCtrl', function ($scope, $http) {
     $('#findCandidateKeysLink').click(function () {
         var inputData = getInputDataInJson();
@@ -87,7 +121,8 @@ normalizationApp.controller('subFindCandidateKeysCtrl', function ($scope, $http)
                         $scope.status = data['data']['status'];
                         $scope.errorMessage = data['data']['errorMessage'];   
                     }else{
-                        $scope.candidateKeys = data['data'];
+                        $scope.candidateKeys = data['data']['candidateKeys'];
+                        $scope.steps = data['data']['steps'];
                     }
                 },
                 function (response) {
@@ -108,27 +143,13 @@ normalizationApp.controller('subCheckNormalFormCtrl', function ($scope, $http) {
                     //2NF
                     $scope.is2NFNormalized = data['data']['is2NF']['isNormalized'];
                     $scope.steps2NF = data['data']['is2NF']['steps'];
-                    if(!$scope.isNormalized){
-                        $scope.violationDescription2NF = data['data']['is2NF']['violation']['desctiption'];   
-                    }else{
-                        $scope.violationDescription2NF = data['data']['is2NF']['violation']['FD'];
-                    }
+                    
                     //3NF
                     $scope.is3NFNormalized = data['data']['is3NF']['isNormalized'];
                     $scope.steps3NF = data['data']['is3NF']['steps'];
-                    if(!$scope.isNormalized){
-                        $scope.violationDescription3NF = data['data']['is3NF']['violation']['desctiption'];   
-                    }else{
-                        $scope.violationDescription3NF = data['data']['is3NF']['violation']['FD'];
-                    }
                     //BCNF
                     $scope.isBCNFNormalized = data['data']['isBCNF']['isNormalized'];
                     $scope.stepsBCNF = data['data']['isBCNF']['steps'];
-                    if(!$scope.isNormalized){
-                        $scope.violationDescriptionBCNF = data['data']['isBCNF']['violation']['desctiption'];   
-                    }else{
-                        $scope.violationDescriptionBCNF = data['data']['isBCNF']['violation']['FD'];
-                    }
                 },
                 function (response) {
                     // Error happened, try again
@@ -143,7 +164,8 @@ normalizationApp.controller('subFindMinimalCoverCtrl', function ($scope, $http) 
         $http.post('normalize.php?normalizeOption=findMinimalCover', inputData).then(
                 function (data, status, jqXHR) {
                     showSubPage("#subFindMinimalCover");
-                    $scope.minimalCover = data['data'];
+                    $scope.minimalCover = data['data']['miniCover'];
+                    $scope.steps = data['data']['steps'];
                 },
                 function (response) {
                     // Error happened, try again
@@ -160,7 +182,8 @@ normalizationApp.controller('subNormalize2NFCtrl', function ($scope, $http) {
         $http.post('normalize.php?normalizeOption=normalize2NF', inputData).then(
                 function (data, status, jqXHR) {
                     showSubPage("#subNormalize2NF");
-                    $scope.normalizedTables = data['data'];
+                    $scope.normalizedTables = data['data']['normalizedTables'];
+                    $scope.steps = data['data']['steps'];
                 },
                 function (response) {
                     // Error happened, try again
@@ -174,7 +197,8 @@ normalizationApp.controller('subNormalize3NFCtrl', function ($scope, $http) {
         $http.post('normalize.php?normalizeOption=normalize3NF', inputData).then(
                 function (data, status, jqXHR) {
                     showSubPage("#subNormalize3NF");
-                    $scope.normalizedTables = data['data'];
+                    $scope.normalizedTables = data['data']['normalizedTables'];
+                    $scope.steps = data['data']['steps'];
                 },
                 function (response) {
                     // Error happened, try again
@@ -188,7 +212,25 @@ normalizationApp.controller('subNormalizeBCNFCtrl', function ($scope, $http) {
         $http.post('normalize.php?normalizeOption=normalizeBCNF', inputData).then(
                 function (data, status, jqXHR) {
                     showSubPage("#subNormalizeBCNF");
-                    $scope.normalizedTables = data['data'];
+                    $scope.normalizedTables = data['data']['normalizedTables'];
+                    $scope.steps = data['data']['steps'];
+                },
+                function (response) {
+                    // Error happened, try again
+                     // TODO
+                });
+    });
+});
+
+normalizationApp.controller('sub1NFTo3NFCtrl', function ($scope, $http) {
+    $('#1NFTo3NFLink').click(function () {
+        var inputData = getInputDataInJson();
+        $http.post('normalize.php?normalizeOption=1NFTo3NF', inputData).then(
+                function (data, status, jqXHR) {
+                    console.log(data['data'])
+                    showSubPage("#sub1NFTo3NF");
+                    $scope.normalizedTables = data['data']['normalizedTables'];
+                    $scope.steps = data['data']['steps'];
                 },
                 function (response) {
                     // Error happened, try again
@@ -210,48 +252,50 @@ normalizationApp.controller('subLoadExampleCtrl', function ($scope, $http) {
                     // TODO
                 });
     });
-	$('#loadExampleConfirmBtn').click(function () {
-		for (var index = 0; index < $scope.fdExamples.fdExamples.length; ++index) {
-			if($scope.fdExamples.fdExamples[index]['title'] == $("#fdExampleSelect").val()){
-				
-				/*
-				 * load attributes
-				 */
-				var attributesCommaSeperated = "";
-				var attributesNumber = $scope.fdExamples.fdExamples[index]['attributes'].length;
-				for(var attributeIndex = 0; attributeIndex < attributesNumber - 1;  ++attributeIndex) {
-					attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributeIndex]);
-					attributesCommaSeperated = attributesCommaSeperated.concat(", ");
-				}
-				attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributesNumber - 1]);
-				$("#attributesTextArea").val(attributesCommaSeperated);
-				
-				
-				/*
-				 * load fds
-				 */
-				$(".dynamicInput").remove();
-				tagInputCounter = 0;
-				var fdsNumber = $scope.fdExamples.fdExamples[index]['fd'].length;
-				for(var fdIndex = 0; fdIndex < fdsNumber; ++fdIndex){
-					addInput("mainContentFunctionalDependency");
-					var newAddedCounter = tagInputCounter - 1;
-					var newAddedId = "functionDependency_" + newAddedCounter;
-					
-					for(var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'].length; fdAttriIndex++){
-						$("#" + newAddedId).find(".leftDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'][fdAttriIndex]);
-					}
-					for(var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'].length; fdAttriIndex++){
-						$("#" + newAddedId).find(".rightDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'][fdAttriIndex]);
-					}
+    $('#loadExampleConfirmBtn').click(function () {
+        for (var index = 0; index < $scope.fdExamples.fdExamples.length; ++index) {
+            if ($scope.fdExamples.fdExamples[index]['title'] == $("#fdExampleSelect").val()) {
 
-				}
+                /*
+                 * load attributes
+                 */
+                var attributesCommaSeperated = "";
+                var attributesNumber = $scope.fdExamples.fdExamples[index]['attributes'].length;
+                for (var attributeIndex = 0; attributeIndex < attributesNumber - 1; ++attributeIndex) {
+                    attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributeIndex]);
+                    attributesCommaSeperated = attributesCommaSeperated.concat(", ");
+                }
+                attributesCommaSeperated = attributesCommaSeperated.concat($scope.fdExamples.fdExamples[index]['attributes'][attributesNumber - 1]);
+                $("#attributesTextArea").val(attributesCommaSeperated);
 
-				$('#subLoadExample').hide();
-				break;
-			}
-		}
-	});
+
+                /*
+                 * load fds
+                 */
+                $(".dynamicInput").remove();
+                tagInputCounter = 0;
+                var fdsNumber = $scope.fdExamples.fdExamples[index]['fd'].length;
+                for (var fdIndex = 0; fdIndex < fdsNumber; ++fdIndex) {
+                    addInput("mainContentFunctionalDependency");
+                    var newAddedCounter = tagInputCounter - 1;
+                    var newAddedId = "functionDependency_" + newAddedCounter;
+
+                    for (var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'].length; fdAttriIndex++) {
+                        $("#" + newAddedId).find(".leftDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['left'][fdAttriIndex]);
+                    }
+                    for (var fdAttriIndex = 0; fdAttriIndex < $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'].length; fdAttriIndex++) {
+                        $("#" + newAddedId).find(".rightDependencyInputDivClass").find("input").first().tagit("createTag", $scope.fdExamples.fdExamples[index]['fd'][fdIndex]['right'][fdAttriIndex]);
+                    }
+
+                }
+
+                $('#subLoadExample').hide();
+                //We show the attributes page after loading the example
+                showSubPage("#subEditAttributes");
+                break;
+            }
+        }
+    });
 	
 });
 
@@ -393,6 +437,9 @@ function showSubPage(subPageId){
     $("#subNormalize2NF").hide();
     $("#subNormalize3NF").hide();
     $("#subNormalizeBCNF").hide();
+    $("#sub1NFTo3NF").hide();
     $("#subFindMinimalCover").hide();
+    $('#subLoadExample').hide();
+    
     $(subPageId).show();
 }

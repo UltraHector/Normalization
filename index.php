@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Home</title>
@@ -15,7 +15,8 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         
         <!-- Angular JS -->
-        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
             
         <!-- Tagit for tags management -->
         <script src="bower_components/tag-it/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
@@ -51,34 +52,41 @@
                         <img src="images/nav_icon_resources.png" width="16" height="16">
                         <a href="#resources" data-toggle="tooltip" data-placement="right" title="Check some learning resources about database!">Learning Resources</a>
                     </li>
-					<li id="loadExampleLink">
+                    <li id="loadExampleLink">
                         <img src="images/nav_icon_example.png" width="16" height="19">
-                        <a href="#loadExample" data-toggle="tooltip" data-placement="right" title="Use this feature to load in an example set of attributes and functional dependencies!">Load Example</a>
+                        <a href="#loadExample" data-toggle="tooltip" data-placement="right" title="Use this feature to load an example set of attributes and functional dependencies!">Load Example</a>
                     </li>
+                    
                     <h3 class="subTitle">Functions</h3>
                     <li id="findCandidateKeysLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#findCandidateKeys" data-toggle="tooltip" data-placement="right" title="Find all candidate keys!">Find Candidate Keys</a>
+                        <a href="#findCandidateKeys" data-toggle="tooltip" data-placement="right" title="Find all candidate keys">Find all Candidate Keys</a>
                     </li>
                     <li id="findMinimalCoverLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#findMinimalCover" data-toggle="tooltip" data-placement="right" title="Find the minimal cover!">Find the minimal cover</a>
+                        <a href="#findMinimalCover" data-toggle="tooltip" data-placement="right" title="Find the minimal cover">Find a minimal cover</a>
                     </li>
                     <li id="checkNormalFormLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#checkNormalForm" data-toggle="tooltip" data-placement="right" title="Check which normalization the table is!">Check normal form</a>
+                        <a href="#checkNormalForm" data-toggle="tooltip" data-placement="right" title="Check which normal form the table is in">Check normal form</a>
                     </li>
                     <li id="normalize2NFLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#normalize2NF" data-toggle="tooltip" data-placement="right" title="Normalize this table to 2NF!">Normalize to 2NF</a>
+                        <a href="#normalize2NF" data-toggle="tooltip" data-placement="right" title="Normalize this table to 2NF">Normalize to 2NF</a>
                     </li>
                     <li id="normalize3NFLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#normalize3NF" data-toggle="tooltip" data-placement="right" title="Normalize this table to 3NF!">Normalize to 3NF</a>
+                        <a href="#normalize3NF" data-toggle="tooltip" data-placement="right" title="Normalize this table to 3NF preserving FDs">Normalize to 3NF</a>
                     </li>
                     <li id="normalizeBCNFLink">
                         <img src="images/nav_icon_bulb.png" width="16" height="16">
-                        <a href="#normalizeBCNF" data-toggle="tooltip" data-placement="right" title="Normalize this table to BCNF!">Normalize to BCNF</a>
+                        <a href="#normalizeBCNF" data-toggle="tooltip" data-placement="right" title="Normalize this table to BCNF">Normalize to BCNF</a>
+                    </li>
+                    
+          
+                    <li id="1NFTo3NFLink">
+                        <img src="images/nav_icon_bulb.png" width="16" height="16">
+                        <a href="#1NFTo3NF" data-toggle="tooltip" data-placement="right" title="1NF to 3NF">1NF to 3NF</a>
                     </li>
                     <!--
                     <h3 class="subTitle">Contact</h3>
@@ -106,15 +114,17 @@
             <?php include 'views/subNormalize2NF.php' ?>
             <?php include 'views/subNormalize3NF.php' ?>
             <?php include 'views/subNormalizeBCNF.php' ?>
+            <?php include 'views/sub1NFTo3NF.php' ?>
 
         </div>
 
         <div id="footer">
             <div style="color:#8F8F8F; font-size:12px; ">© ICT of Griffith University 2015</div>
         </div>
-		
+        
+        <!-- The loading example take the full screen -->
+        <?php include 'views/subLoadExample.php' ?>
+        
     </body>
-
-	<?php include 'views/subLoadExample.php' ?>
 
 </html>
