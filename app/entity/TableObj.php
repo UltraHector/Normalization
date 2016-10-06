@@ -11,15 +11,16 @@ class TableObj {
     }
 
     function printMe() {
-        $result = "";
+        $result = "<br>";
         $result = $result.printset($this->theTable);
-        $result. "<br>";
-        $result. "with FDs <br>";
+        $result = $result. "<br>";
+        $result = $result. "with FDs <br>";
         foreach ($this->theFDs as $f) {
-            $f->printMe();
-            $result. "<br>";
+            $result = $result. $f->printMe();
+            $result = $result. "<br>";
         }
-        $result. "<br>";
+        $result = $result. "<br>";
+        return $result;
     }
 
     public function inBCNF() {

@@ -53,7 +53,7 @@ body {
 .mainContentRightColumn{
     background: white;
     float:right;
-    width:800px;
+    width:900px;
     padding-left:90px;
     min-height:900px;
     height:100%;
@@ -192,6 +192,7 @@ body {
     border: 2px #CC0000 solid;
     border-radius: 5px;
     color:white;
+    width:100%;
 }
 
 .candidateKeysListDiv{

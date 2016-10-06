@@ -12,7 +12,7 @@
         <br/>
         <h4>Functional Dependencies</h4>
         <br/>
-         <span ng-repeat="functionalDependency in normalizedTable.theFDs" class="normalizedTableAttributeSpan">
+         <div ng-repeat="functionalDependency in normalizedTable.theFDs" class="normalizedTableAttributeSpan">
              
              <span ng-repeat="attribute in functionalDependency.ls">
                  {{attribute}} &nbsp;&nbsp;
@@ -23,7 +23,7 @@
              <span ng-repeat="attribute in functionalDependency.rs">
                  {{attribute}} &nbsp;&nbsp;
              </span>
-        </span>
+        </div>
     </div>
     
     <div>

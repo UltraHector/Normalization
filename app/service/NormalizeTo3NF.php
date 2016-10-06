@@ -55,7 +55,7 @@ function to3NF($F, $R) {
 
     $NKEY = setDiff($keyAttr, $R);   // non-key attributes  
 
-    array_push($result['steps'], "Step 2. Find all cadnidate keys. The set of candiates keys is { ");
+    array_push($result['steps'], "Step 2. Find all candidate keys. The set of candidates keys is { ");
     
     foreach ($CK as $set) {
         $result['steps'][1] =  $result['steps'][1]."(";
@@ -115,7 +115,7 @@ function to3NF($F, $R) {
         $result['steps'][3] =  $result['steps'][3].$fd->printMe();
 
         if (!isSuperkey($fd->ls, $F, $R)) {
-            $result['steps'][3] =  $result['steps'][3]. "<br> The FD violates 3NF as its  LHS is not key, its RHS are non-key attributes. ";
+            $result['steps'][3] =  $result['steps'][3]. "<br> The FD violates 3NF as its  LHS is not a superkey (and RHS is a set of non-key attributes). ";
 
             $t = setUnion($fd->rs, $fd->ls);  //first table
 
@@ -146,7 +146,7 @@ function to3NF($F, $R) {
                 $tb = new TableObj($t, $FDsforTable_t);
                 array_push($NFTables, $tb);
 
-                $result['steps'][3] =  $result['steps'][3]. "<br>The following 3NF table is obtained <br>";
+                $result['steps'][3] =  $result['steps'][3]. "<br>The following 3NF table is obtained: <br>";
                 $result['steps'][3] =  $result['steps'][3].$tb->printMe();
                 $result['steps'][3] =  $result['steps'][3]. " <br>";
             } else {
@@ -175,7 +175,7 @@ function to3NF($F, $R) {
     }
     $FDsforTable_R = findMergedMC($FDs);
     $tb = new TableObj($R, $FDsforTable_R);  // add table R to 3NF tables 
-    array_push($result['steps'], "Step 5: Finally, add the following table into normalized 3NF table set (obtained by removing RHS attributes of FDs violating 3NF): <br>");
+    array_push($result['steps'], "Step 5: Finally, add the following table into normalized 3NF table set (obtained by removing RHS attributes of FDs using which we produced a table): <br>");
     $result['steps'][4] =  $result['steps'][4].$tb->printMe();
     $result['steps'][4] =  $result['steps'][4];
     array_push($NFTables, $tb);

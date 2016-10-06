@@ -1,6 +1,7 @@
 <?php
 require_once (dirname(__FILE__).'/../entity/FD.php');
 require_once (dirname(__FILE__).'/../entity/Sets.php');
+require_once (dirname(__FILE__).'/../util/Array_Util.php');
 
 
 function findClosureSet($A, $F) {
@@ -50,7 +51,7 @@ function findMiniCover($F) {
             array_push($result['miniCover'], $f);
         }
     }
-    $result['steps']['step1'] = $result['miniCover'];
+    $result['steps']['step1'] = array_copy($result['miniCover']);
 
     $result['miniCover'] = array();
     foreach ($F as $fd) {   // do it again just to show the step to remove trivial FDs
@@ -60,8 +61,8 @@ function findMiniCover($F) {
             array_push($result['miniCover'], $f);
         }
     }
-
-    $result['steps']['step2'] = $result['miniCover'];
+    
+    $result['steps']['step2'] = array_copy($result['miniCover']);
 
 // minimize LHS of each FD, 
     foreach ($result['miniCover'] as $fd) {
@@ -79,8 +80,8 @@ function findMiniCover($F) {
             }
         }
     }
-
-    $result['steps']['step3'] = $result['miniCover'];
+    
+    $result['steps']['step3'] = array_copy($result['miniCover']);
     
     /* remove redundant FDs */
     foreach ($result['miniCover'] as $fd) {
@@ -110,7 +111,7 @@ function findMiniCover($F) {
     }
 
 
-    $result['steps']['step4'] = $result['miniCover'];
+    $result['steps']['step4'] = array_copy($result['miniCover']);
 
     return $result;
 }

@@ -12,9 +12,20 @@ function To2NF($F, $R) {
 
     $NFTables = array();
 
+    if (is2NF($F, $R)['isNormalized']) {
+
+        array_push($result['steps'], "Table already in 2NF");
+
+        $tb = new TableObj($R, $MC);
+        array_push($NFTables, $tb);
+        
+        $result['normalizedTables'] = $NFTables;
+        return $result;
+    }
+       
     $MC = findMiniCover($F)['miniCover'];
 
-    array_push($result['steps'], "First, find the merger minimal cover of the FDs (removing trivial and redundant ones, making LHS smallest), which is <br>");
+    array_push($result['steps'], "First, find the  minimal cover of the FDs, which includes the FDs <br>");
     foreach ($MC as $fd) {
         $result['steps'][0] = $result['steps'][0] . $fd->printMe();
         $result['steps'][0] = $result['steps'][0] . "<br>";
@@ -44,7 +55,7 @@ function To2NF($F, $R) {
     while ($i < $K) {
         array_push($result['steps'], "Round" . ($i + 1) . ": checking table rel[" . ($i + 1) . "] <br>");
 
-        if (is2NF($FDs[$i], $rel[$i])) {
+        if (is2NF($FDs[$i], $rel[$i])['isNormalized']) {
 
             $result['steps'][$i + 1] = $result['steps'][$i + 1] . "<br>***** The table is in 2NF already, send it to output *****";
             $fs = findMergedMC($FDs[$i]);
@@ -56,9 +67,9 @@ function To2NF($F, $R) {
             $K = $K + 2;
 
             $result['steps'][$i + 1] = $result['steps'][$i + 1] . "<br> The table is not in 2NF.";
-            $decompose2NF1_result = decompose2NF1($FDs[$i], $rel[$i]);
-            $tbs = $decompose2NF1_result['tbs'];
-            $result['steps'][$i + 1] = $result['steps'][$i + 1] . $decompose2NF1_result['steps'];
+            $decompose2NF_result = decompose2NF($FDs[$i], $rel[$i]);
+            $tbs = $decompose2NF_result['tbs'];
+            $result['steps'][$i + 1] = $result['steps'][$i + 1] . $decompose2NF_result['steps'];
 
             array_push($rel, $tbs[0]); // this table is actually already in 2NF, but it is OK to check again as efficiency is not a problem. 
 
@@ -121,8 +132,8 @@ function decompose2NF($F, $R) {
     $result['steps'] = "";
     $tbs = array();  // return a set of 2 attribute sets, no FDs
 
-    $C = findMiniCover($F);
-    $CK = findAllCK($F, $R);
+    $C = findMiniCover($F)['miniCover'];
+    $CK = findAllCK($F, $R)['candidateKeys'];
 
     $keyAttr = array();  // key attrbutes
 
