@@ -1,4 +1,4 @@
-<div id="subNormalizeBCNF" class="mainContentRightColumn" ng-controller="subNormalizeBCNFCtrl">
+<div id="subNormalizeBCNF" class="mainContentRightColumn" ng-controller="subNormalizeBCNFCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;">Normalize to BCNF</h2>
     
     <div class="normalizedTablesDiv" ng-repeat="normalizedTable in normalizedTables">

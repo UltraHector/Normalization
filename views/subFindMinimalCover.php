@@ -1,4 +1,4 @@
-<div id="subFindMinimalCover" class="mainContentRightColumn" ng-controller="subFindMinimalCoverCtrl">
+<div id="subFindMinimalCover" class="mainContentRightColumn" ng-controller="subFindMinimalCoverCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;" >Find Minimal Cover</h2>
     <br/>
     <br/>

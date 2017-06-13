@@ -1,4 +1,4 @@
-<div id="sub1NFTo3NF" class="mainContentRightColumn" ng-controller="sub1NFTo3NFCtrl">
+<div id="sub1NFTo3NF" class="mainContentRightColumn" ng-controller="sub1NFTo3NFCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;">1NF to 3NF</h2>
     
     <div class="normalizedTablesDiv" ng-repeat="normalizedTable in normalizedTables">

@@ -14,6 +14,8 @@ function from1NFto3NF($F, $R) {
     $result['steps'] = array();
     $NFTables = array();
 
+    $MC = findMiniCover($F)['miniCover'];
+        
     if (is3NF($F, $R)['isNormalized']) {
         array_push($result['steps'], "<br> Table already in 3NF");
         $tb = new TableObj($R, $MC);
@@ -24,7 +26,6 @@ function from1NFto3NF($F, $R) {
         return $result;
     }
 
-    $MC = findMiniCover($F)['miniCover'];
     $LHS = array();
 
     foreach ($MC as $fd) {

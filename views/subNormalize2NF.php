@@ -1,4 +1,4 @@
-<div id="subNormalize2NF" class="mainContentRightColumn" ng-controller="subNormalize2NFCtrl">
+<div id="subNormalize2NF" class="mainContentRightColumn" ng-controller="subNormalize2NFCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;">Normalize to 2NF</h2>
     
     <div class="normalizedTablesDiv" ng-repeat="normalizedTable in normalizedTables">

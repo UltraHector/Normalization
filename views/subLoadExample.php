@@ -1,4 +1,4 @@
-<div id="subLoadExample" class="subLoadExample" ng-controller="subLoadExampleCtrl">
+<div id="subLoadExample" class="subLoadExample" ng-controller="subLoadExampleCtrl" style="display:none;">
 
     <div style="background:white;margin:auto; width:60%; top: 10%; position:relative; padding-left:30px;padding-right:30px; padding-top:20px;padding-bottom:20px;">
         <a href="" id="closeLoadExample" style="float:right; right:10px;font-size:40px;">&#215;</a>

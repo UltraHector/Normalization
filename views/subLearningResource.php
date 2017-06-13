@@ -1,4 +1,4 @@
-<div id="subLearningResources" class="mainContentRightColumn">
+<div id="subLearningResources" class="mainContentRightColumn" style="display:none;">
     <h2>Learning Resources</h2>
     
     <br/>

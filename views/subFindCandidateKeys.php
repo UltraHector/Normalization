@@ -1,4 +1,4 @@
-<div id="subFindCandidateKeys" class="mainContentRightColumn" ng-controller="subFindCandidateKeysCtrl">
+<div id="subFindCandidateKeys" class="mainContentRightColumn" ng-controller="subFindCandidateKeysCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;" >Find Candidate Keys</h2>
     <br/>
     <br/>

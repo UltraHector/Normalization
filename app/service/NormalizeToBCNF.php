@@ -12,14 +12,18 @@ function ToBCNF($F, $R) {
 
     $NFTables = array();
 
+    $MC = findMergedMC($F);
+        
     if (isBCNF($F, $R)['isNormalized']) {            // table is already in BCNF
         array_push($result['steps'], "<br> Table already in BCNF, return itself.");
         
+        $tb = new TableObj($R, $MC);
+        array_push($NFTables, $tb);
         $result['normalizedTables'] = $NFTables;
         return $result;
     }
 
-    $MC = findMergedMC($F);
+
 
     array_push($result['steps'], "Step 1. Find merged minimal cover of FDs, which contains: <br>");
 

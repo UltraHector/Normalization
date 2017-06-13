@@ -1,4 +1,4 @@
-<div id="subCheckNormalForm" class="mainContentRightColumn" ng-controller="subCheckNormalFormCtrl">
+<div id="subCheckNormalForm" class="mainContentRightColumn" ng-controller="subCheckNormalFormCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;">Check Normal Form</h2>
     <br/>
     <br/>

@@ -1,4 +1,4 @@
-<div id="subNormalize3NF" class="mainContentRightColumn" ng-controller="subNormalize3NFCtrl">
+<div id="subNormalize3NF" class="mainContentRightColumn" ng-controller="subNormalize3NFCtrl" style="display:none;">
     <h2 style="border-bottom: dotted 1px;">Normalize to 3NF</h2>
     
     <div class="normalizedTablesDiv" ng-repeat="normalizedTable in normalizedTables">

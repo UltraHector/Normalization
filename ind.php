@@ -4,28 +4,16 @@
         <title>Home</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='https://fonts.googleapis.com/css?family=Cantata+One' rel='stylesheet' type='text/css'>
-
-        <!-- JQuery -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bower_components/bootstrap/3.3.7/css/bootstrap.min.css">
         
-        <!-- Angular JS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
-            
         <!-- Tagit for tags management -->
-        <script src="bower_components/tag-it/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
         <link href="bower_components/tag-it/css/jquery.tagit.css" rel="stylesheet" type="text/css">
         <link href="bower_components/tag-it/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 
         <!-- App'own java scripts/css -->
         <link rel='stylesheet' href='css/style.css'/>
-        <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 
     </head>
     <body ng-app="normalizationApp">
@@ -127,6 +115,18 @@
         <!-- The loading example take the full screen -->
         <?php include 'views/subLoadExample.php' ?>
         
+		
+        <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="bower_components/jquery/dist/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="bower_components/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Angular JS -->
+        <script src="bower_components/angularjs/1.2.26/angular.js"></script>
+        <script src="bower_components/angularjs/1.2.26/angular-sanitize.js"></script>
+		
+        <script src="bower_components/tag-it/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+		
+        <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+
     </body>
 
 </html>

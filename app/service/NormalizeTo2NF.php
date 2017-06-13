@@ -11,17 +11,6 @@ function To2NF($F, $R) {
     $result['steps'] = array();
 
     $NFTables = array();
-
-    if (is2NF($F, $R)['isNormalized']) {
-
-        array_push($result['steps'], "Table already in 2NF");
-
-        $tb = new TableObj($R, $MC);
-        array_push($NFTables, $tb);
-        
-        $result['normalizedTables'] = $NFTables;
-        return $result;
-    }
        
     $MC = findMiniCover($F)['miniCover'];
 
